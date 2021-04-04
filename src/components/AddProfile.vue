@@ -1,12 +1,12 @@
 <template>
   <div class="q-pa-md">
 
-    <q-input outlined v-model="localEditedProfile.name" label="Name" type="text"/>
-    <q-input outlined v-model="localEditedProfile.age" label="Age" type="number"/>
-    <q-input outlined v-model="localEditedProfile.price" label="Price" type="number"/>
-    <q-input outlined v-model="localEditedProfile.specialties" label="Specialties" type="text"/>
-    <q-input outlined v-model="localEditedProfile.exper" label="Years of experience " type="number"/>
-    <q-input outlined v-model="localEditedProfile.profileImg" label="Profile image [URL]" type="text"/>
+    <q-input outlined dense v-model="localEditedProfile.name" label="Name" type="text"/>
+    <q-input outlined dense v-model="localEditedProfile.age" label="Age" type="number"/>
+    <q-input outlined dense v-model="localEditedProfile.price" label="Price" type="number"/>
+    <q-input outlined dense v-model="localEditedProfile.specialties" label="Specialties" type="text"/>
+    <q-input outlined dense v-model="localEditedProfile.exper" label="Years of experience " type="number"/>
+    <q-input outlined dense v-model="localEditedProfile.profileImg" label="Profile image [URL]" type="text"/>
     <!--    <progress value="0" max="100" v-model="uploader">0%</progress>-->
     <!--    <q-input type="file" value="upload" v-model="uploadImg"></q-input>-->
     <div>
@@ -20,7 +20,7 @@
       <img class="preview" height="268" width="356" :src="localEditedProfile.profileImg">
       <br>
     </div>
-    <q-input outlined v-model="localEditedProfile.coverImg" label="Cover image [URL]" type="text"/>
+    <q-input outlined dense v-model="localEditedProfile.coverImg" label="Cover image [URL]" type="text"/>
     <div>
       <q-btn @click="click2">choose a photo</q-btn>
       <input type="file" ref="input2"
@@ -32,10 +32,10 @@
       <img class="preview" height="268" width="356" :src="localEditedProfile.coverImg">
       <br>
     </div>
-    <q-input outlined v-model="tempVideo" label="Youtube video [URL]" type="text"/>
+    <q-input dense outlined v-model="tempVideo" label="Youtube video [URL]" type="text"/>
     <q-btn color="white" text-color="black" label="Add video" @click="insertVideo()"/>
     <br>
-    <q-input outlined v-model="localEditedProfile.about" label="About yourself" type="textarea"/>
+    <q-input dense outlined v-model="localEditedProfile.about" label="About yourself" type="textarea"/>
 
     <div v-for="(video,index) of localEditedProfile.videos">
       <iframe :src=video frameborder="0" allowfullscreen="allowfullscreen" width=100%></iframe>
@@ -94,6 +94,7 @@ export default {
 
     localSetEditedProfile() {
       this.setEditedProfile(this.localEditedProfile);
+      this.localEditedProfile = {};
     },
 
     goToAdminPage() {
@@ -101,7 +102,6 @@ export default {
     },
 
     insert() {
-      debugger
       this.localSetEditedProfile();
       this.insertProfile();
     },
@@ -113,7 +113,6 @@ export default {
     },
 
     insertVideo() {
-      debugger
       const youtubeUrl = '//www.youtube.com/embed/'
       let youtubeId = this.getYoutubeId(this.tempVideo);
       // if (this.profile) {

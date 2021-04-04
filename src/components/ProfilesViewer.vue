@@ -1,17 +1,19 @@
 <template xmlns="http://www.w3.org/1999/html">
-  <q-page clss="bg-grey-3 column">
+  <q-page clss="column">
     <div class="q-pa-md">
-      <q-input outlined v-model="search" label="Search by EVERYTHING" type="text" style="margin : 15px 0"/>
+      <q-input class="col" dense outlined v-model="search" label="Search by EVERYTHING" type="text" style="margin : 15px 0"/>
       <!--      <br>-->
 
-      <q-card class="my-card" v-for="(profile, key ) of filterdProfiles" :key="key">
+      <q-card  class="my-card" v-for="(profile, key ) of filterdProfiles" :key="key">
         <iframe v-if="profile.videos" :src=profile.videos[0] frameborder="0" allowfullscreen="allowfullscreen" width=100%></iframe>
         <q-expansion-item
             expanded
             :label=profile.name
             :caption='profile.specialties'
+            dense
 
         >
+
           <template v-slot:header>
             <q-item-section avatar>
               <q-avatar>
@@ -47,7 +49,9 @@
 
           </q-card-section>
         </q-expansion-item>
+
       </q-card>
+
 
     </div>
 
@@ -79,7 +83,7 @@ export default {
 
   methods: {
     ...mapActions('profiles',['getProfiles']),
-    ...mapGetters('profiles',['searchProfile']),
+    // ...mapGetters('profiles',['searchProfile']),
     goToProfile(id) {
       this.$router.push(`/profile/${id}`);
 
@@ -103,7 +107,6 @@ export default {
   computed: {
     ...mapState('profiles', ['profiles']),
     filterdProfiles: function () {
-      debugger
       return this.profiles.filter((profile, key) => {
         return profile.name.match(this.search) || profile.specialties.match(this.search) || profile.about.match(this.search) ||
             profile.age === this.search || profile.price === this.search || profile.exper === this.search

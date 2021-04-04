@@ -9,7 +9,6 @@ export default {
     },
 
     deleteProfile: async ({state, commit}) => {
-        debugger
         await database.remove({entity: 'profiles', profileId: state.editedProfileId});
 
         const profileId = state.editedProfileId;
@@ -17,6 +16,7 @@ export default {
         commit('resetEditedProfileId'); // reset id value after use
 
         commit('deleteProfile', profileId);
+
 
     },
 
@@ -51,7 +51,6 @@ export default {
 
     setEditProfileById: async ({state, commit}) => {
 
-        debugger
 
         let profile = {};
 

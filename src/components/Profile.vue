@@ -11,7 +11,7 @@
       />
     </div>
 
-      <q-list class="my-list" bordered padding>
+      <q-list dense class="my-list" bordered padding >
         <q-item>
           <q-item-section>
             <q-item-label overline>{{ profile.name }}</q-item-label>
@@ -97,7 +97,6 @@
       </q-list>
 
     </div>
-
 </template>
 
 

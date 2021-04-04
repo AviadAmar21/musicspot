@@ -7,10 +7,11 @@
         :columns="columns"
         row-key="name"
         binary-state-sort
+        dense
     >
       <template v-slot:body="props">
         <q-tr :props="props">
-          <q-td key="name" :props="props" @click="goToProfile(props.row.id)">{{ props.row.name }}</q-td>
+          <q-td  key="name" :props="props" @click="goToProfile(props.row.id)">{{ props.row.name }}</q-td>
           <q-td key="age" :props="props" @click="goToProfile(props.row.id)">{{ props.row.age }}</q-td>
           <q-td key="price" :props="props" @click="goToProfile(props.row.id)">{{ props.row.price }}</q-td>
           <q-td key="specialties" :props="props" @click="goToProfile(props.row.id)">{{ props.row.specialties }}</q-td>
@@ -33,7 +34,7 @@
 // import api from '../middleware/api';
 // import firebaseDatabase from '../middleware/firebase/database'
 
-import {mapState, mapActions,mapMutations} from 'vuex';
+import {mapState, mapActions, mapMutations} from 'vuex';
 
 
 export default {
@@ -65,18 +66,18 @@ export default {
   computed: mapState('profiles', ['editedProfileId', 'profiles']),
 
   methods: {
-  ...mapActions('profiles',['getProfiles','deleteProfile']),
-  ...mapMutations('profiles',['setEditedProfileId','changeEditedProfileById']),
+    ...mapActions('profiles', ['getProfiles', 'deleteProfile']),
+    ...mapMutations('profiles', ['setEditedProfileId', 'changeEditedProfileById']),
     goToProfile(id) {
       this.$router.push(`edit/profile/${id}`);
-    } ,
+    },
 
     removeProfile(id) {
-    debugger
-    this.setEditedProfileId(id);
-    this.changeEditedProfileById(id);
-    this.deleteProfile();
-    this.getProfiles();
+      this.setEditedProfileId(id);
+      this.changeEditedProfileById(id);
+      this.deleteProfile()
+      this.getProfiles();
+
     }
   },
 

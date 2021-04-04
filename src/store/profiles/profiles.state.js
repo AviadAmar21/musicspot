@@ -1,6 +1,7 @@
 export default {
     profiles: [],
     editedProfileId: '',
+    isLogIn : false, //todo: move to users store
     editedProfile: {
         name: '',
         age: 0,

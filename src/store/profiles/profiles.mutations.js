@@ -2,17 +2,13 @@ export default {
 
     setProfiles: ((state, profiles) => state.profiles = profiles),
 
-    setEditedProfileId: ((state, id) => {
-        debugger
-        state.editedProfileId = id
-    }),
+    setEditedProfileId: ((state, id) => state.editedProfileId = id),
 
     setEditedProfile: ((state, profile) => state.editedProfile = profile),
 
     resetEditedProfileId: ((state) => state.editedProfileId = ''),
 
-    changeEditedProfileById: ((state,id) => {
-        debugger
+    changeEditedProfileById: ((state, id) => {
         state.editedProfile = state.profiles.filter(profile => profile.id === id);
     }),
 
@@ -43,14 +39,18 @@ export default {
     }),
 
     deleteProfile: ((state, profile) => {
-        debugger
         const index = state.profiles.findIndex(p => p.id === profile.id);
-        state.profile.splice(index, 1); // delete obj from store
+        state.profiles.splice(index, 1); // delete obj from store
 
     }),
 
     insertProfile: ((state, profile) => {
         state.profiles.push(profile);
+    }),
+
+    setUserLogIn: ((state, val) => {
+        state.isLogIn = val;
     })
+
 
 }

@@ -1,7 +1,7 @@
   <template>
     <div class="q-pa-md">
-      <q-input outlined v-model="userEmail" filled type="email" hint="Enter Email"/>
-      <q-input v-model="userPassword" filled :type="isPwd ? 'password' : 'text'" hint="Enter password">
+      <q-input dense outlined v-model="userEmail" filled type="email" hint="Enter Email"/>
+      <q-input dense v-model="userPassword" filled :type="isPwd ? 'password' : 'text'" hint="Enter password">
         <template v-slot:append>
           <q-icon
               :name="isPwd ? 'visibility_off' : 'visibility'"
@@ -12,7 +12,7 @@
       </q-input>
       <br>
 
-      <q-btn @click="signIn(userEmail,userPassword)">Sign in</q-btn>
+      <q-btn dense @click="signIn(userEmail,userPassword)">Log in</q-btn>
 
     </div>
   </template>
