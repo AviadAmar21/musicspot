@@ -35,7 +35,7 @@ export default {
 
     editProfile: ((state, profile) => {
         const index = state.profiles.findIndex(p => p.id === profile.id);
-        state.profile.splice(index, 1, profile); // replace previous obj with new editedObj (after changes in data)
+        state.profiles.splice(index, 1, profile); // replace previous obj with new editedObj (after changes in data)
     }),
 
     deleteProfile: ((state, profile) => {

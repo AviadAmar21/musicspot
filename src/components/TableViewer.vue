@@ -7,18 +7,17 @@
         :columns="columns"
         row-key="name"
         binary-state-sort
-        dense
     >
       <template v-slot:body="props">
         <q-tr :props="props">
-          <q-td  key="name" :props="props" @click="goToProfile(props.row.id)">{{ props.row.name }}</q-td>
-          <q-td key="age" :props="props" @click="goToProfile(props.row.id)">{{ props.row.age }}</q-td>
-          <q-td key="price" :props="props" @click="goToProfile(props.row.id)">{{ props.row.price }}</q-td>
-          <q-td key="specialties" :props="props" @click="goToProfile(props.row.id)">{{ props.row.specialties }}</q-td>
-          <q-td key="exper" :props="props" @click="goToProfile(props.row.id)">{{ props.row.exper }}</q-td>
-          <q-td key="about" :props="props" @click="goToProfile(props.row.id)">{{ props.row.about }}</q-td>
+          <q-td  key="name" :props="props" @click="goToProfile(props.row.userId , props.row.id)">{{ props.row.name }}</q-td>
+          <q-td key="age" :props="props" @click="goToProfile(props.row.userId, props.row.id)">{{ props.row.age }}</q-td>
+          <q-td key="price" :props="props" @click="goToProfile(props.row.userId, props.row.id)">{{ props.row.price }}</q-td>
+          <q-td key="specialties" :props="props" @click="goToProfile(props.row.userId, props.row.id)">{{ props.row.specialties }}</q-td>
+          <q-td key="exper" :props="props" @click="goToProfile(props.row.userId, props.row.id)">{{ props.row.exper }}</q-td>
+          <q-td key="about" :props="props" @click="goToProfile(props.row.userId, props.row.id)">{{ props.row.about }}</q-td>
           <q-td key="actions" :props="props">
-            <q-btn @click="removeProfile(props.row.id)">
+            <q-btn v-if="currentUser.uid === props.row.userId" @click="removeProfile(props.row.id)">
               Delete
             </q-btn>
           </q-td>
@@ -59,8 +58,10 @@ export default {
         {name: 'about', label: 'About yourself', field: 'about'},
         {name: 'actions', label: 'Actions'}
 
-      ]
+      ],
+      currentUser : window.user
     }
+
   },
 
   computed: mapState('profiles', ['editedProfileId', 'profiles']),
@@ -68,8 +69,10 @@ export default {
   methods: {
     ...mapActions('profiles', ['getProfiles', 'deleteProfile']),
     ...mapMutations('profiles', ['setEditedProfileId', 'changeEditedProfileById']),
-    goToProfile(id) {
-      this.$router.push(`edit/profile/${id}`);
+    goToProfile(userId,id) {
+      if(this.currentUser.uid === userId) {
+        this.$router.push(`edit/profile/${id}`);
+      }
     },
 
     removeProfile(id) {

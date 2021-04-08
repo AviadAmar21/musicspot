@@ -1,10 +1,11 @@
 <template>
   <div>
-    <q-btn @click="login()" >Google login</q-btn>
-    <q-btn @click="signIn()">Sign in</q-btn>
+    <q-btn @click="googleLogin()" icon="eva-google" ></q-btn>
+    <q-btn @click="signIn()">Log in</q-btn>
     <q-btn @click="Register()">Register</q-btn>
 
   </div>
+
 </template>
 
 <script>
@@ -13,7 +14,7 @@ import firebaseInstance from '../middleware/firebase'
 export default {
   name: "Login",
   methods: {
-    login() {
+    googleLogin() {
       const provider = new firebaseInstance.firebase.auth.GoogleAuthProvider();
       firebaseInstance.firebase.auth()
           .signInWithPopup(provider)
@@ -26,6 +27,10 @@ export default {
             // The signed-in user info.
             let user = result.user;
             window.user = result.user;
+            let myUser = {};
+            myUser.email = user.email;
+            myUser.id = window.user.uid;
+            firebaseInstance.firebase.database().ref(`users/`).push(myUser); //todo: fix database saves duplicate users by add log in google button
             this.$router.push('/home');
             // ...
           }).catch((error) => {

@@ -3,12 +3,13 @@ import database from "../../middleware/firebase/database";
 export default {
 
     getProfiles: async ({commit}) => {
-
         const profiles = await database.get({entity: 'profiles'});
+
         commit('setProfiles', profiles);
     },
 
     deleteProfile: async ({state, commit}) => {
+
         await database.remove({entity: 'profiles', profileId: state.editedProfileId});
 
         const profileId = state.editedProfileId;
@@ -21,13 +22,10 @@ export default {
     },
 
     updateProfile: async ({state, commit}) => {
-
         const profile = {};
 
         Object.assign(profile, state.editedProfile);
-        profile.id = state.editedProfileId;
-
-        await database.update({entity: 'profiles', profileId: profile.id, profile});
+        await database.update({entity: 'profiles', profileId: state.editedProfileId, profile});
 
         commit('resetEditedProfile');
 
@@ -42,6 +40,7 @@ export default {
 
         Object.assign(profile, state.editedProfile);
 
+        profile.userId = window.user.uid;
         profile.id = (await database.create({entity: 'profiles', profile})).key;
 
         commit('resetEditedProfile');
@@ -50,7 +49,6 @@ export default {
     },
 
     setEditProfileById: async ({state, commit}) => {
-
 
         let profile = {};
 

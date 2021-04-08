@@ -10,6 +10,8 @@ const nodemailer = require("nodemailer");
 //   response.send("Hello from Firebase!");
 // });
 
+//todo: make the automatic send welcome email function work
+
 const APP_NAME = 'MusicSer';
 
 
@@ -18,7 +20,7 @@ let mailTransport = nodemailer.createTransport({
     service: 'gmail',
     auth: {
         user: 'aviad2154@gmail.com',
-        pass: 'Aviad2589'
+        pass: '1234' // todo: make it generic
     }
 });
 

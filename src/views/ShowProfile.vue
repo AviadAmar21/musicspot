@@ -6,11 +6,12 @@
 </template>
 
 <script>
-import localStorageDrive from '../middleware/local-storage';
+// import localStorageDrive from '../middleware/local-storage';
 import Profile from '../components/Profile';
 import profileVideoCarousel from '../components/profileVideoCarousel';
-import api from "@/middleware/api";
+// import api from "@/middleware/api";
 import firebaseDatabase from '../middleware/firebase/database'
+import {mapState, mapActions} from 'vuex';
 
 export default {
   name: "ShowProfile",
@@ -22,16 +23,22 @@ export default {
   data() {
     return {
       profile: {},
-      tableName: 'profiles',
+      tableName: 'profile',
     }
   },
 
+  computed: mapState('profiles',['profiles']),
+
   methods: {
+    ...mapActions('profiles',['getProfiles']),
     getProfileById() {
-      firebaseDatabase.getProfileById({entity: this.tableName, profileId: this.$route.params.id})
-          .then(response => {
-            this.profile = response;
-          })
+      let arr = [];
+      arr = this.profiles.filter(profile => profile.id === this.$route.params.id);
+      Object.assign(this.profile,arr[0]);
+      // firebaseDatabase.getProfileById({entity: this.tableName, profileId: this.$route.params.id})
+      //     .then(response => {
+      //       this.profile = response;
+      //     })
       // this.profile = localStorageDrive.getProfileById(this.tableName,this.$route.params.id);
     }
   },

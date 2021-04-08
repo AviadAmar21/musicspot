@@ -47,6 +47,7 @@ export default {
           .catch((error) => {
             var errorCode = error.code;
             this.errorMessage = error.message;
+            console.log(error.message);
 
           });
     }

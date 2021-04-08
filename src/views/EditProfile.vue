@@ -1,7 +1,7 @@
 <template>
   <div>
 <!--    <AddProfile v-if="isAdded" :tableName="tableName" :profile="profile"/>-->
-    <AddProfile  :tableName="this.tableName" />
+    <AddProfile  />
   </div>
 </template>
 
@@ -13,7 +13,6 @@ import AddProfile from "@/components/AddProfile";
 
 export default {
   name: "EditProfile",
-  tableName:'profiles',
   components: {
     AddProfile
   },

@@ -48,9 +48,11 @@
             <!--        about : {{ profile.about }}-->
 
           </q-card-section>
+
         </q-expansion-item>
 
       </q-card>
+
 
 
     </div>
@@ -91,6 +93,7 @@ export default {
 
     read() {
       this.getProfiles()
+
     },
     // filterdProfiles: function () {
     //   return this.data.filter((profile, key) => {
@@ -119,8 +122,15 @@ export default {
 
 <style lang="sass" scoped>
 .my-card
-  width: 100%
   max-width: 55%
   padding: revert
   margin: inherit
+  display: grid
+  margin-bottom: 15px
+
+@media only screen and (max-width: 700px)
+  .my-card
+    max-width: 100%
+
+
 </style>

@@ -177,7 +177,9 @@ export default {
             Object.assign(this.localEditedProfile, this.editedProfile);
           })
     }
-  }
+  },
+
+
 }
 
 

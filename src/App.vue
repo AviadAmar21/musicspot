@@ -9,7 +9,7 @@
             @click="leftDrawerOpen = !leftDrawerOpen"
             aria-label="Menu"
             icon="menu"
-            class="desktop-only"
+            class="desktop-only absolute-bottom-left"
         />
 
       </q-toolbar>
@@ -162,6 +162,7 @@ export default {
       let timeStamp = Date.now()
       return date.formatDate(timeStamp, 'dddd D MMMM');
     }
+
   },
 
   created() {

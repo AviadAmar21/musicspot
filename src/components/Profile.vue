@@ -11,7 +11,7 @@
       />
     </div>
 
-      <q-list dense class="my-list" bordered padding >
+      <q-list dense class="my-list" bordered padding  >
         <q-item>
           <q-item-section>
             <q-item-label overline>{{ profile.name }}</q-item-label>
@@ -95,7 +95,6 @@
           </q-item-section>
         </q-item>
       </q-list>
-
     </div>
 </template>
 
@@ -119,7 +118,7 @@ export default {
 
   methods: {
     removeKeys() {
-      for (var key in this.profile) {
+      for (let key in this.profile) {
         if (!(key == 'id' || key == 'profileImg' || key == 'coverImg')) {
           this.filteredProfiles[key] = this.profile[key];
         }
@@ -156,8 +155,8 @@ export default {
 
 .profileImg
   border-radius: 50%
-  width: 30%
-  height: 30%
+  width: 150px
+  height: 150px
   position: relative
   bottom: 140px
   border: solid 3px #dddddd
@@ -167,6 +166,16 @@ export default {
   flex-direction: column
   align-items: center
 
+@media only screen and (max-width: 700px)
+  .coverImg
+    height: auto
 
+  .main
+    width: 100%
+  .my-list
+    bottom: 115px
+
+  .profileImg
+    bottom: 114px
 
 </style>

@@ -38,6 +38,11 @@ export default {
             window.user = user;
             this.userEmail = '';
             this.userPassword = '';
+            let myUser = {};
+            myUser.email = user.email;
+            myUser.id = window.user.uid;
+            firebaseInstance.firebase.database().ref(`users/`).push(myUser);
+            this.$router.push('/home');
             // ...
           })
           .catch((error) => {

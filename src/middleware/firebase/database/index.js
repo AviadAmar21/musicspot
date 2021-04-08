@@ -5,7 +5,7 @@ import database from 'firebase/database';
 export default {
 
     get: options => {
-        return firebaseInstance.firebase.database().ref(`users/${window.user.uid}/data/${options.entity}`).once('value')
+        return firebaseInstance.firebase.database().ref(`${options.entity}/`).once('value')
             .then(res => {
                 const arr = [];
                 const map = res.val();
@@ -19,18 +19,38 @@ export default {
             })
     },
 
+    getUsersProfiles : () => {
+        return firebaseInstance.firebase.database().ref(`users/`).once('value')
+            .then(res => {
+                const arr = [];
+                let profile = {};
+                const map = res.val();
+                for (const key in map) {
+                    const item = map[key].data.profile; //todo: check this
+                    for (const profileKey in item) {
+                        profile.id = profileKey;
+                        Object.assign(profile,item[profileKey]);
+                        arr.push(profile);
+                    }
+                    profile = {};
+                }
+
+                return arr;
+            })
+    },
+
+
     create: options => {
-        return firebaseInstance.firebase.database().ref(`users/${window.user.uid}/data/${options.entity}`).push(options.profile);
+        return firebaseInstance.firebase.database().ref(`${options.entity}/`).push(options.profile);
     },
 
     remove: options => {
-        debugger
-        return firebaseInstance.firebase.database().ref(`users/${window.user.uid}/data/${options.entity}/${options.profileId}`).remove();
+        return firebaseInstance.firebase.database().ref(`${options.entity}/${options.profileId}`).remove();
 
     },
 
     update: options => {
-        return firebaseInstance.firebase.database().ref(`users/${window.user.uid}/data/${options.entity}/${options.profileId}`).update(options.profile);
+        return firebaseInstance.firebase.database().ref(`${options.entity}/${options.profileId}`).update(options.profile);
 
     },
 
@@ -71,6 +91,13 @@ export default {
 
     getRef: options => {
         return firebaseInstance.firebase.database().ref(`users/${window.user.uid}/data/${options.entity}`)
+    },
+
+    getUserIdByProfile : options => {
+        return firebaseInstance.firebase.database().ref(`users/`).once('value')
+            .then(res=> {
+
+            })
     }
 
 
