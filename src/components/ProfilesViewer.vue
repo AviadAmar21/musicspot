@@ -1,9 +1,10 @@
 <template xmlns="http://www.w3.org/1999/html">
   <q-page clss="column">
     <div class="q-pa-md">
-      <q-input class="col" dense outlined v-model="search" label="Search by EVERYTHING" type="text" style="margin : 15px 0"/>
+      <div>
+      <q-input class="col" dense outlined v-model="search" label="Search by EVERYTHING" type="text" style="margin : 15px 0" />
       <!--      <br>-->
-
+      </div>
       <q-card  class="my-card" v-for="(profile, key ) of filterdProfiles" :key="key">
         <iframe v-if="profile.videos" :src=profile.videos[0] frameborder="0" allowfullscreen="allowfullscreen" width=100%></iframe>
         <q-expansion-item

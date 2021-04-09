@@ -35,7 +35,7 @@
           <q-item-section avatar>
             <q-icon color="primary" name="workspaces" />
           </q-item-section>
-          <q-item-section>I'm specialize in {{profile.specialties }}</q-item-section>
+          <q-item-section>I'm specialize in {{profile.specialties }} 🎸</q-item-section>
           <q-item-section avatar>
             <q-icon color="primary" name="library_music" />
           </q-item-section>

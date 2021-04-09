@@ -42,7 +42,8 @@
       <q-btn color="white" text-color="black" icon="delete" @click="deleteVideo(index)"/>
     </div>
 
-    <q-btn v-if="!editedProfile.id" color="white" text-color="black" label="Add" @click="insert()"/>
+    <q-btn v-if="!editedProfile.id && !userAddProfile" color="white" text-color="black" label="Add" @click="insert()"/>
+    <span class="text-caption" v-else> Already signed in to MusicServ app! :)</span>
     <q-btn v-if="editedProfile.id" color="white" text-color="black" label="Update" @click="update()"/>
   </div>
 </template>
@@ -58,7 +59,7 @@ import {mapActions, mapState, mapMutations} from "vuex";
 export default {
   name: "addProfile",
   props: ['tableName'],
-  computed: mapState('profiles', ['editedProfile']),
+  computed: mapState('profiles', ['editedProfile', 'profiles']),
 
 
   data() {
@@ -85,6 +86,7 @@ export default {
       coverImageData: null,
       // isProfile: true,
       // uploadValue: 0
+      userAddProfile: false,
     }
   },
 
@@ -177,7 +179,23 @@ export default {
             Object.assign(this.localEditedProfile, this.editedProfile);
           })
     }
+
+    if ((this.profiles.filter(profile => profile.userId === window.user.uid)).length) {
+      this.userAddProfile = true;
+    }
+
   },
+
+  // filters: {
+  //   filterUserNameByUserId() {
+  //     const profile = this.profiles.filter(profile => profile.userId === window.user.uid);
+  //
+  //     if (profile.length){
+  //       return profile.name;
+  //     }
+  //
+  //   }
+  // }
 
 
 }
