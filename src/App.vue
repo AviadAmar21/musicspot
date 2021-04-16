@@ -15,10 +15,11 @@
       </q-toolbar>
     <div class="q-px-lg q-pt-xl q-mb-md ">
         <div style="display: flex">
-          <div class="logo-div"><span class="app-name-style">MusicSer</span>
+          <div class="logo-div"><span class="app-name-style">MusicSpot</span>
             <img src="./assets/disc.svg" class="my-logo"></div>
         </div>
-        <div> {{ todaysDate }}</div>
+      <div>Not only for Musicians</div>
+<!--      <div> {{ todaysDate }}</div>-->
       </div>
       <q-img
           src="https://images.unsplash.com/photo-1501612780327-45045538702b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
@@ -30,7 +31,7 @@
           icon="eva-log-out"
           class="absolute-bottom-right mobile-only text-grey-5"
           color="black-5"
-
+                  
 
       />
 
