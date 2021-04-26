@@ -45,7 +45,6 @@ export default {
 
     arr.splice(index,1);
     localStorage.setItem(table,JSON.stringify(arr));
-
     },
 
     update : function (table,id, profile) {

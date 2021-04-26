@@ -19,7 +19,6 @@
             <img src="./assets/disc.svg" class="my-logo"></div>
         </div>
       <div>Not only for Musicians</div>
-<!--      <div> {{ todaysDate }}</div>-->
       </div>
       <q-img
           src="https://images.unsplash.com/photo-1501612780327-45045538702b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
@@ -95,11 +94,12 @@
     </q-drawer>
 
     <q-footer class="bg-black mobile-only" bordered>
-      <q-tabs class="text-grey-4" active-color="grey-9" indicator-color="transparent">
+      <q-tabs class="text-grey-4" active-color="purple-7" indicator-color="transparent">
         <q-route-tab
             name="home"
             icon="eva-home-outline"
             to="/home"/>
+
         <q-route-tab
             name="edit"
             icon="eva-edit-outline"

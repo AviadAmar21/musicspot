@@ -2,11 +2,26 @@
   <q-page clss="column">
     <div class="q-pa-md">
       <div>
-      <q-input class="col" dense outlined v-model="search" label="Search by EVERYTHING" type="text" style="margin : 15px 0" />
-      <!--      <br>-->
+      <q-input
+          class="search-input"
+          clearable
+          color="purple-7"
+          dense
+          outlined
+          v-model="search"
+          label="Search by EVERYTHING"
+          type="text"
+          autogrow
+      >
+        <template v-slot:append>
+          <q-icon name="eva-search-outline" />
+        </template>
+      </q-input>
+
+
       </div>
       <q-card  class="my-card" v-for="(profile, key ) of filterdProfiles" :key="key">
-        <iframe v-if="profile.videos" :src=profile.videos[0] frameborder="0" allowfullscreen="allowfullscreen" width=100%></iframe>
+        <iframe v-if="profile.videos" :src=profile.videos[0] frameborder="0" allowfullscreen="allowfullscreen"  width=100%></iframe>
         <q-expansion-item
             expanded
             :label=profile.name
@@ -79,7 +94,8 @@ export default {
   },
 
   created() {
-    this.read();
+    this.getProfiles()
+
 
     // this.data = localStorageDriver.dbSelect(this.tableName);
   },
@@ -92,10 +108,6 @@ export default {
 
     },
 
-    read() {
-      this.getProfiles()
-
-    },
     // filterdProfiles: function () {
     //   return this.data.filter((profile, key) => {
     //     return profile.name.match(this.search) || profile.specialties.match(this.search) || profile.about.match(this.search) ||
@@ -129,9 +141,23 @@ export default {
   display: grid
   margin-bottom: 15px
 
+.search-input
+  position: relative
+  margin: 15px 0
+  width: 30%
+
 @media only screen and (max-width: 700px)
   .my-card
     max-width: 100%
+
+@media only screen and (max-width: 700px)
+  .search-input
+   position: relative
+   margin: 15px 0
+   width: 80%
+
+
+
 
 
 </style>

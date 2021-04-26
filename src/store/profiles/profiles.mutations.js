@@ -15,7 +15,6 @@ export default {
     resetEditedProfile: ((state) => {
 
         for (const key in state.editedProfile) {
-
             if (typeof (state.editedProfile[key]) === 'string') {
                 state.editedProfile[key] = '';
             } else if (typeof (state.editedProfile[key]) === 'number') {
