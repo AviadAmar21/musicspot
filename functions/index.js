@@ -1,6 +1,8 @@
 'use strict';
 const functions = require("firebase-functions");
 const nodemailer = require("nodemailer");
+const puppeteer = require('puppeteer');
+
 // const nodemailer = require('nodemailer');
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions
@@ -9,6 +11,10 @@ const nodemailer = require("nodemailer");
 //   functions.logger.info("Hello logs!", {structuredData: true});
 //   response.send("Hello from Firebase!");
 // });
+
+
+
+
 
 //todo: make the automatic send welcome email function work
 
@@ -42,7 +48,7 @@ exports.sendWelcomeEmail = functions.auth.user().onCreate((user) => {
 // Sends a welcome email to the given user.
 async function sendWelcomeEmail(email, displayName) {
     const mailOptions = {
-        from: `${APP_NAME} <aviad@musicser.com>`,
+        from: `${APP_NAME} <aviad@musicser.com>`,firebase deploy --only hosting
         to: email,
     };
 
@@ -53,3 +59,5 @@ async function sendWelcomeEmail(email, displayName) {
     console.log('New welcome email sent to:', email);
     return null;
 }
+
+
