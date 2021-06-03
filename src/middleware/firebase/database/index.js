@@ -14,7 +14,9 @@ export default {
                     item.id = key;
                     arr.push(item);
                 }
-
+                if (options.entity === 'posts') {
+                    return arr.reverse();
+                }
                 return arr;
             })
     },
@@ -41,6 +43,7 @@ export default {
 
 
     create: options => {
+        debugger
         return firebaseInstance.firebase.database().ref(`${options.entity}/`).push(options.profile);
     },
 
@@ -89,16 +92,26 @@ export default {
 
     },
 
+    getProfile : options => {
+        debugger
+        return firebaseInstance.firebase.database().ref(`${options.entity}/`).once('value')
+            .then(res => {
+                const arr = [];
+                const map = res.val();
+                for (const key in map) {
+                    const item = map[key];
+                    item.id = key;
+                    arr.push(item);
+                }
+
+                const profile = arr.filter(profile => profile.userId == options.uid)
+                return profile[0];
+
+            })
+    },
+
     getRef: options => {
         return firebaseInstance.firebase.database().ref(`users/${window.user.uid}/data/${options.entity}`)
     },
-
-    getUserIdByProfile : options => {
-        return firebaseInstance.firebase.database().ref(`users/`).once('value')
-            .then(res=> {
-
-            })
-    }
-
 
 }

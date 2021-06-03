@@ -47,7 +47,7 @@ export default {
         state.profiles.push(profile);
     }),
 
-    setUserLogIn: ((state, val) => {
+    setUserLogIn: ((state,val) => {
         state.isLogIn = val;
     })
 

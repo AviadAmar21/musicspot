@@ -1,54 +1,22 @@
 <template>
-  <q-page class="flex q-pa-md">
-    <q-card class="full-width">
-      <q-tabs
-          v-model="tab"
-          dense
-          class="text-grey"
-          active-color="purple"
-          indicator-color="purple"
-          align="justify"
-          narrow-indicator
-      >
-        <q-tab name="login" label="Login" />
-        <q-tab name="register" label="Register" />
-      </q-tabs>
-
-      <q-separator />
-
-      <q-tab-panels v-model="tab" animated>
-        <q-tab-panel name="login">
-            <SignIn/>
-        </q-tab-panel>
-
-        <q-tab-panel name="register">
-          <Register/>
-        </q-tab-panel>
-
-      </q-tab-panels>
-
-    </q-card>
-
-  </q-page>
-
+  <q-btn @click="googleLogin()" icon="eva-google" color="grey-4" text-color="purple" glossy unelevated ></q-btn>
 </template>
 
 <script>
-import firebaseInstance from '../middleware/firebase'
-import Register from './Register'
-import SignIn from "./SignIn";
-import GoogleLogin from "../components/GoogleLogin";
+import firebaseInstance from "../middleware/firebase";
 
 export default {
-  name: "Login",
-  components: {GoogleLogin, SignIn, Register},
+  name: "GoogleLogin",
   data() {
     return {
-      tab: 'login'
+      userEmail: '',
+      userPassword: '',
+      isPwd: true,
+      errorMessage: '',
+      signTry : false
     }
   },
-
-  methods: {
+  methods : {
     googleLogin() {
       const provider = new firebaseInstance.firebase.auth.GoogleAuthProvider();
       firebaseInstance.firebase.auth()
@@ -78,21 +46,6 @@ export default {
         let credential = error.credential;
         // ...
       });
-    },
-
-    signIn() {
-      this.$router.push('/signin');
-    },
-
-    Register() {
-      this.$router.push('/register');
-    }
-  },
-
-
-  created() {
-    if(window.user) {
-      this.$router.push('/home');
     }
   }
 }

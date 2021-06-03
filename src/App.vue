@@ -30,7 +30,7 @@
           icon="eva-log-out"
           class="absolute-bottom-right mobile-only text-grey-5"
           color="black-5"
-                  
+
 
       />
 
@@ -93,13 +93,12 @@
       </q-img>
     </q-drawer>
 
-    <q-footer class="bg-black mobile-only" bordered>
+    <q-footer class="bg-black mobile-only" bordered elevated>
       <q-tabs class="text-grey-4" active-color="purple-7" indicator-color="transparent">
         <q-route-tab
             name="home"
             icon="eva-home-outline"
             to="/home"/>
-
         <q-route-tab
             name="edit"
             icon="eva-edit-outline"
@@ -107,7 +106,7 @@
         <q-route-tab
             name="camera"
             icon="eva-camera-outline"
-            to="/upload-Post"/>
+            to="/upload-post"/>
         <q-route-tab
             name="feed"
             icon="eva-hash"

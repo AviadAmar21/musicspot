@@ -43,7 +43,7 @@
     </div>
 
     <q-btn v-if="!editedProfile.id && !userAddProfile" color="white" text-color="black" label="Add" @click="insert()"/>
-    <span class="text-caption" v-else> Already signed in to MusicServ app! :)</span>
+<!--    <span class="text-caption" v-else> Already signed in to MusicServ app! :)</span>-->
     <q-btn v-if="editedProfile.id" color="white" text-color="black" label="Update" @click="update()"/>
   </div>
 </template>
@@ -149,13 +149,12 @@ export default {
     },
 
     profileImage(event) {
+      debugger
       this.profileImageData = event.target.files[0];
       firebaseStorage.uploadPhoto({entity: 'profileImages', file: this.profileImageData})
           .then(res => {
             this.localEditedProfile.profileImg = res;
           })
-
-
     },
 
     coverImage(event) {
@@ -165,7 +164,6 @@ export default {
             this.localEditedProfile.coverImg = res;
           })
     }
-
 
   },
 

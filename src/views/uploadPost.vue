@@ -76,6 +76,7 @@
               label="Post Image"
               rounded
               unelevated
+              @click="createPost"
           />
         </div>
       </div>
@@ -86,6 +87,9 @@
 <script>
 
 import {uid} from 'quasar' // todo: remove this after database import
+import firebase from '../middleware/firebase/database';
+import firebaseStorage from '../middleware/firebase/storage';
+
 require('md-gum-polyfill')
 
 export default {
@@ -97,19 +101,19 @@ export default {
         id: uid(),
         location: '',
         caption: '',
-        photo: null,
+        imgUrl: null,
         date: Date.now()
       },
       imageCaptured: false,
       imageUpload: [], // accepts array by quasar docs
       hasCameraSupport: true,
-      locationLoading : false
+      locationLoading: false
     }
   },
 
-  computed : {
+  computed: {
     locationSupported() { //checks if location works in client browser
-      if('geolocation' in navigator) return true
+      if ('geolocation' in navigator) return true
       return false
     }
   },
@@ -125,22 +129,42 @@ export default {
       })
     },
 
+    async createPost() {
+      debugger
+      const profile = await firebase.getProfile({entity: 'profiles', uid: window.user.uid});
+      console.log('profile',profile);
+      let uploadPost = {};
+      if (this.post) {
+        Object.assign(uploadPost,this.post)
+      }
+      uploadPost.userImg = profile.profileImg;
+      uploadPost.userName = profile.name;
+      console.log(uploadPost);
+      await firebase.create({entity: 'posts', profile: uploadPost })
+      console.log('post uplodaed! ');
+    },
+
     captureImage() {
       let video = this.$refs.video,
-          canvas = this.$refs.canvas
+          canvas = this.$refs.canvas;
       canvas.width = video.getBoundingClientRect().width;
       canvas.height = video.getBoundingClientRect().height;
       let context = canvas.getContext('2d');
       context.drawImage(video, 0, 0, canvas.width, canvas.height);
       this.imageCaptured = true;
-      this.post.photo = this.dataURItoBlob(canvas.toDataURL());
+      this.post.imgUrl = this.dataURItoBlob(canvas.toDataURL());
+      console.log('video:',video);
       this.disableCamera()
 
     },
 
     captureImageFallback(file) {
-      this.post.photo = file;
-
+      debugger
+      const imgData = file;
+      firebaseStorage.uploadPhoto({entity: 'postImage', file: imgData})
+          .then(res => {
+            this.post.imgUrl = res;
+          })
       let canvas = this.$refs.canvas,
           context = canvas.getContext('2d');
 

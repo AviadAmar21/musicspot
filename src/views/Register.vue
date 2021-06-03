@@ -1,7 +1,7 @@
 <template>
   <div class="q-pa-md">
-    <q-input outlined v-model="userEmail" filled type="email" hint="Enter Email" />
-    <q-input v-model="userPassword" filled :type="isPwd ? 'password' : 'text'" hint="Enter password">
+    <q-input dense outlined v-model="userEmail" filled type="email" hint="Enter Email" />
+    <q-input dense v-model="userPassword" filled :type="isPwd ? 'password' : 'text'" hint="Enter password">
       <template v-slot:append>
         <q-icon
             :name="isPwd ? 'visibility_off' : 'visibility'"
@@ -11,16 +11,19 @@
       </template>
     </q-input>
     <br>
-
-    <q-btn @click="Register(userEmail,userPassword)">Register</q-btn>
+    <div class="q-pa-md q-gutter-sm my-buttons">
+      <q-btn color="grey-4" text-color="purple" glossy unelevated icon="eva-person-add" label="Register" @click="Register(userEmail,userPassword)"/>
+      <GoogleLogin/>
+    </div>
   </div>
 </template>
 
 <script>
 import firebaseInstance from '../middleware/firebase'
+import GoogleLogin from "../components/GoogleLogin";
 export default {
   name: "Register",
-
+  components: {GoogleLogin},
   data() {
     return {
       userEmail: '',
@@ -57,6 +60,10 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+.my-buttons {
+  display: flex;
+  justify-content: space-evenly;
+}
 
 </style>

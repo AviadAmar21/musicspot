@@ -24,22 +24,6 @@ const routes = [
 
   },
 
-  {
-    path: '/register',
-    name: 'Register',
-    component: Register,
-    meta : {authNotRequired: true}
-
-  },
-
-  {
-    path: '/signin',
-    name: 'SignIn',
-    component: SignIn,
-    meta : {authNotRequired: true}
-
-  },
-
 
   {
     path: '/edit/profile/:id',
@@ -82,6 +66,14 @@ const routes = [
     path: '/upload-post',
     name: 'uploadPost',
     component: () => import(/* webpackChunkName: "about" */ '../views/uploadPost.vue'),
+    meta : {authNotRequired: false}
+
+  },
+
+  {
+    path: '/scraper',
+    name: 'scraper',
+    component: () => import('../views/scraper'),
     meta : {authNotRequired: false}
 
   },

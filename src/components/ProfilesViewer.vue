@@ -77,8 +77,8 @@
 </template>
 
 <script>
-import localStorageDriver from '../middleware/local-storage';
-import api from '../middleware/api';
+// import localStorageDriver from '../middleware/local-storage';
+// import api from '../middleware/api';
 // import firebaseDatabase from '../middleware/firebase/database';
 import {mapActions,mapState,mapGetters} from 'vuex'
 
