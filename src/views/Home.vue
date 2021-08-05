@@ -1,8 +1,6 @@
 <template>
   <div class="home">
     <ProfilesViewer :tableName ="'profiles'"/>
-<!--    <AddProfile :tableName="'profilesTable'" @profileAdded="reloadTable"/>-->
-<!--    <TableViewer :tableName="'profilesTable'" :isReload="isReload"/>-->
   </div>
 </template>
 
@@ -19,17 +17,5 @@ export default {
     ProfilesViewer,
     AddProfile, TableViewer
   }
-
-  // data() {
-  //   return {
-  //     isReload: false
-  //   }
-  // },
-  // methods: {
-  //   reloadTable() {
-  //     this.isReload = !this.isReload;
-  //
-  //   }
-  // }
 }
 </script>

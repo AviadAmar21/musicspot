@@ -69,7 +69,7 @@ export default {
     //         .then(response => {
     //             const profile = response.data.result[0]; // data way
     //             debugger
-    //             return profile;
+b    //             return profile;
     //         })
     // },
 

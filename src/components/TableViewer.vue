@@ -3,7 +3,7 @@
 
     <q-table
         title="Profiles"
-        :data="profiles"
+        :data="this.profiles"
         :columns="columns"
         row-key="name"
         binary-state-sort
@@ -88,18 +88,10 @@ export default {
     this.getProfiles();
   }
 
-  // watch: {
-  //   isReload() {
-  //     this.read();
-  //   }
-  // }
-
 }
-
 
 </script>
 
 <style lang="sass">
-
 
 </style>

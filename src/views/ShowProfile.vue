@@ -19,7 +19,6 @@ export default {
     Profile, profileVideoCarousel,
   },
 
-
   data() {
     return {
       profile: {},
@@ -35,19 +34,13 @@ export default {
       let arr = [];
       arr = this.profiles.filter(profile => profile.id === this.$route.params.id);
       Object.assign(this.profile,arr[0]);
-      // firebaseDatabase.getProfileById({entity: this.tableName, profileId: this.$route.params.id})
-      //     .then(response => {
-      //       this.profile = response;
-      //     })
-      // this.profile = localStorageDrive.getProfileById(this.tableName,this.$route.params.id);
+
     }
   },
 
   created() {
       this.getProfileById();
   }
-
-
 }
 </script>
 

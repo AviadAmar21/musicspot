@@ -3,7 +3,8 @@ import database from "../../middleware/firebase/database";
 export default {
 
     getProfiles: async ({commit}) => {
-        const profiles = await database.get({entity: 'profiles'});
+
+        const profiles = await database.get({entity: 'profiles'})
 
         commit('setProfiles', profiles);
     },

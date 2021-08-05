@@ -7,14 +7,12 @@
             ref="video"
             class="full-width"
             autoplay
-
         />
         <canvas
             v-show="imageCaptured"
             ref="canvas"
             class="full-width"
             height="240"
-
         />
       </div>
 
@@ -112,7 +110,7 @@ export default {
   },
 
   computed: {
-    locationSupported() { //checks if location works in client browser
+    locationSupported() { // checks if location works in client browser
       if ('geolocation' in navigator) return true
       return false
     }
@@ -132,35 +130,47 @@ export default {
     async createPost() {
       debugger
       const profile = await firebase.getProfile({entity: 'profiles', uid: window.user.uid});
-      console.log('profile',profile);
       let uploadPost = {};
       if (this.post) {
-        Object.assign(uploadPost,this.post)
+        Object.assign(uploadPost, this.post)
       }
       uploadPost.userImg = profile.profileImg;
       uploadPost.userName = profile.name;
-      console.log(uploadPost);
-      await firebase.create({entity: 'posts', profile: uploadPost })
-      console.log('post uplodaed! ');
+      await firebase.create({entity: 'posts', profile: uploadPost})
+      this.post = {};
+      if (this.hasCameraSupport) {
+        this.initCamera();
+      }
+      else {
+        this.imageUpload = '';
+      }
+      this.imageCaptured = false;
     },
 
     captureImage() {
-      let video = this.$refs.video,
-          canvas = this.$refs.canvas;
+      let video = this.$refs.video
+      let canvas = this.$refs.canvas;
       canvas.width = video.getBoundingClientRect().width;
       canvas.height = video.getBoundingClientRect().height;
       let context = canvas.getContext('2d');
       context.drawImage(video, 0, 0, canvas.width, canvas.height);
       this.imageCaptured = true;
-      this.post.imgUrl = this.dataURItoBlob(canvas.toDataURL());
-      console.log('video:',video);
+      const imgData = this.dataURItoBlob(canvas.toDataURL());
+      imgData.name = new Date().getTime();
+      console.log(imgData);
+      firebaseStorage.uploadPhoto({entity: 'postImage', file: imgData})
+          .then(res => {
+            this.post.imgUrl = res;
+          }).catch(err => {
+            console.log(err);
+      })
       this.disableCamera()
-
     },
 
     captureImageFallback(file) {
       debugger
       const imgData = file;
+      console.log(imgData);
       firebaseStorage.uploadPhoto({entity: 'postImage', file: imgData})
           .then(res => {
             this.post.imgUrl = res;
@@ -169,15 +179,15 @@ export default {
           context = canvas.getContext('2d');
 
 
-      var reader = new FileReader();
-      reader.onload = event => {
-        var img = new Image();
-        img.onload = () => {
-          canvas.width = img.width;
-          canvas.height = img.height;
-          context.drawImage(img, 0, 0);
-          this.imageCaptured = true;
-        }
+      let reader = new FileReader();
+        reader.onload = event => {
+          let img = new Image();
+          img.onload = () => {
+            canvas.width = img.width;
+            canvas.height = img.height;
+            context.drawImage(img, 0, 0);
+            this.imageCaptured = true;
+          }
         img.src = event.target.result;
       }
       reader.readAsDataURL(file);
@@ -231,8 +241,6 @@ export default {
       }).catch(err => {
         this.locationError()
       })
-
-
     },
 
     locationSuccess(result) {
@@ -246,10 +254,11 @@ export default {
     locationError() {
       this.$q.dialog({
         title: 'Error',
-        message: 'Could not find your location'
+        message: 'Could not find your location',
+        dark: true,
+        color: 'purple'
       })
       this.locationLoading = false;
-
     }
   },
 
@@ -277,6 +286,4 @@ export default {
 .constrain-more
   max-width: 600px
   margin: 0 auto
-
-
 </style>

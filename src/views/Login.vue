@@ -24,13 +24,9 @@
         <q-tab-panel name="register">
           <Register/>
         </q-tab-panel>
-
       </q-tab-panels>
-
     </q-card>
-
   </q-page>
-
 </template>
 
 <script>

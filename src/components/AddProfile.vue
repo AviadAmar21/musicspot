@@ -42,9 +42,9 @@
       <q-btn color="white" text-color="black" icon="delete" @click="deleteVideo(index)"/>
     </div>
 
-    <q-btn v-if="!editedProfile.id && !userAddProfile" color="white" text-color="black" label="Add" @click="insert()"/>
+    <q-btn v-if="!this.editedProfile.id && !userAddProfile" color="white" text-color="black" label="Add" @click="insert()"/>
 <!--    <span class="text-caption" v-else> Already signed in to MusicServ app! :)</span>-->
-    <q-btn v-if="editedProfile.id" color="white" text-color="black" label="Update" @click="update()"/>
+    <q-btn v-if="this.editedProfile.id" color="white" text-color="black" label="Update" @click="update()"/>
   </div>
 </template>
 
@@ -81,11 +81,8 @@ export default {
       },
 
       tempVideo: '',
-      // img1: '',
       profileImageData: null,
       coverImageData: null,
-      // isProfile: true,
-      // uploadValue: 0
       userAddProfile: false,
     }
   },
@@ -117,9 +114,6 @@ export default {
     insertVideo() {
       const youtubeUrl = '//www.youtube.com/embed/'
       let youtubeId = this.getYoutubeId(this.tempVideo);
-      // if (this.profile) {
-      //   this.profile.videos.push(youtubeUrl + youtubeId);
-      // }
       if (!this.localEditedProfile.videos.length) {
         this.localEditedProfile.videos = [];
       }
@@ -138,7 +132,6 @@ export default {
     deleteVideo(index) {
       this.localEditedProfile.videos.splice(index, 1);
     },
-
 
     click1() {
       this.$refs.input1.click()
@@ -167,7 +160,6 @@ export default {
 
   },
 
-
   created() {
     if (this.$route.params.id) {
       this.setEditedProfileId(this.$route.params.id);
@@ -182,19 +174,6 @@ export default {
     }
 
   },
-
-  // filters: {
-  //   filterUserNameByUserId() {
-  //     const profile = this.profiles.filter(profile => profile.userId === window.user.uid);
-  //
-  //     if (profile.length){
-  //       return profile.name;
-  //     }
-  //
-  //   }
-  // }
-
-
 }
 
 

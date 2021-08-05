@@ -18,10 +18,9 @@
         </template>
       </q-input>
 
-
       </div>
-      <q-card  class="my-card" v-for="(profile, key ) of filterdProfiles" :key="key">
-        <iframe v-if="profile.videos" :src=profile.videos[0] frameborder="0" allowfullscreen="allowfullscreen"  width=100%></iframe>
+      <q-card class="my-card" v-for="(profile, key ) of filterdProfiles" :key="key">
+        <iframe v-if="profile.videos" :src=profile.videos[0] frameborder="0" allowfullscreen="allowfullscreen" width=100%></iframe>
         <q-expansion-item
             expanded
             :label=profile.name
@@ -29,7 +28,6 @@
             dense
 
         >
-
           <template v-slot:header>
             <q-item-section avatar>
               <q-avatar>
@@ -42,37 +40,18 @@
             </q-item-section>
           </template>
           <q-card-section class="q-pt-none">
-            <!--          <img src='../assets/logo.png'>-->
-            <div class="text-subtitle1" @click="goToProfile(profile.id)">{{ profile.name }}</div>
+            <div class="text-subtitle1 my-text" @click="goToProfile(profile.id)" >{{ profile.name }}</div>
           </q-card-section>
-
-
           <q-card-section class="q-pt-none">
             <span> My music experience is in  {{ profile.specialties }}  </span>
             <br>
             <span>{{ profile.age }} Years old </span>
             <br>
             <span>{{ profile.price }}$ </span>
-
-
-            <!--        price: {{ profile.price }}$-->
-            <!--        <br>-->
-            <!--        specialties: {{ profile.specialties }}-->
-            <!--        <br>-->
-            <!--        years of experience: {{ profile.exper }}-->
-            <!--        <br>-->
-            <!--        about : {{ profile.about }}-->
-
           </q-card-section>
-
         </q-expansion-item>
-
       </q-card>
-
-
-
     </div>
-
   </q-page>
 </template>
 
@@ -90,43 +69,25 @@ export default {
     return {
       search: ''
     }
-
   },
 
   created() {
-    this.getProfiles()
-
-
-    // this.data = localStorageDriver.dbSelect(this.tableName);
+    this.getProfiles();
   },
 
   methods: {
     ...mapActions('profiles',['getProfiles']),
-    // ...mapGetters('profiles',['searchProfile']),
     goToProfile(id) {
       this.$router.push(`/profile/${id}`);
-
     },
-
-    // filterdProfiles: function () {
-    //   return this.data.filter((profile, key) => {
-    //     return profile.name.match(this.search) || profile.specialties.match(this.search) || profile.about.match(this.search) ||
-    //         profile.age === this.search || profile.price === this.search || profile.exper === this.search
-    //
-    //   });
-    // }
-
-
   },
-
 
   computed: {
     ...mapState('profiles', ['profiles']),
     filterdProfiles: function () {
       return this.profiles.filter((profile, key) => {
-        return profile.name.match(this.search) || profile.specialties.match(this.search) || profile.about.match(this.search) ||
+        return profile.name.includes(this.search) || profile.specialties.includes(this.search) || profile.about.includes(this.search) ||
             profile.age === this.search || profile.price === this.search || profile.exper === this.search
-
       });
     }
   }
@@ -145,6 +106,9 @@ export default {
   position: relative
   margin: 15px 0
   width: 30%
+
+.my-text
+  cursor: pointer
 
 @media only screen and (max-width: 700px)
   .my-card

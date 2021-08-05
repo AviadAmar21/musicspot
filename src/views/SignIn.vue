@@ -51,8 +51,8 @@ export default {
             var errorCode = error.code;
             this.errorMessage = error.message;
             console.log(error.message);
-
           });
+
     }
   }
 

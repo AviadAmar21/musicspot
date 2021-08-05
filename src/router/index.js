@@ -96,10 +96,11 @@ const router = new VueRouter({
 router.beforeEach((to,from,next) => {
   const user = firebaseInstance.firebase.auth().currentUser;
   if (user && to.meta.authNotRequired || !user && !to.meta.authNotRequired) {
-    const path = !user ? '/' : '/home';
+    const path = !user ? '/' : `/home`;
     return next(path);
   }
   next();
 })
+
 
 export default router

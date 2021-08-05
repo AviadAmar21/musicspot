@@ -16,7 +16,6 @@
       <iframe v-if="profile.videos" :src=profile.videos[index] frameborder="0" allowfullscreen="allowfullscreen"
               width=100% height=300px></iframe>
 
-
       <div class="row justify-center">
         <q-btn
             glossy
@@ -40,7 +39,6 @@ export default {
   },
 
   methods: {
-
     swapVideo() {
       if (this.index === this.profile.videos.length - 1) {
         this.index = 0;
@@ -48,8 +46,6 @@ export default {
         this.index++;
       }
     }
-
-
   }
 }
 </script>
@@ -70,6 +66,5 @@ export default {
 
   .my-list
     bottom: 115px
-
 
 </style>

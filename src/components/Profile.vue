@@ -3,8 +3,6 @@
     <div class="images">
       <q-img :src=profile.coverImg
              class="coverImg"
-
-
       />
       <q-img :src=profile.profileImg
              class="profileImg"
@@ -16,15 +14,9 @@
           <q-item-section>
             <q-item-label overline>{{ profile.name }}</q-item-label>
             <q-separator spaced />
-
             <q-item-label>About me</q-item-label>
-
             <q-item-label caption>{{ profile.about }}</q-item-label>
-
           </q-item-section>
-
-
-
         </q-item>
 
         <q-separator spaced />
@@ -35,11 +27,10 @@
           <q-item-section avatar>
             <q-icon color="primary" name="workspaces" />
           </q-item-section>
-          <q-item-section>I'm specialize in {{profile.specialties }} 🎸</q-item-section>
+          <q-item-section>I'm specialize in {{profile.specialties }} </q-item-section>
           <q-item-section avatar>
             <q-icon color="primary" name="library_music" />
           </q-item-section>
-
         </q-item>
 
         <q-separator spaced inset="item" />
@@ -104,7 +95,6 @@
 export default {
   name: "Profile",
   props: ['tableName', 'profile'],
-
 
   data() {
     return {

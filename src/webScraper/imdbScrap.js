@@ -1,7 +1,6 @@
 
 const puppeteer = require('puppeteer');
 
-
 (async () => {
     let movieUrl = 'https://www.imdb.com/title/tt0075148/?ref_=nv_sr_srsg_3';
 
